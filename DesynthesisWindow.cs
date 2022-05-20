@@ -20,7 +20,7 @@ namespace DesynthesisTwo;
 public unsafe class DesynthesisWindow : Window {
 
     private readonly float maxDesynthLevel;
-    private delegate void DesynthItemDelegate(AgentInterface* agent, InventoryItem* item, ushort a3 = 0x11, byte a4 = 0);
+    private delegate void DesynthItemDelegate(AgentInterface* agent, InventoryItem* item, ushort a3 = 0, byte a4 = 0);
     private IntPtr desynthItemPtr;
     private readonly DesynthItemDelegate? desynthItem;
     private readonly Plugin plugin;
