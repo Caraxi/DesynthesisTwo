@@ -72,6 +72,7 @@ public sealed class Plugin : IDalamudPlugin
         CommandManager.RemoveHandler(CommandName);
         foreach (var a in commandAlias) CommandManager.RemoveHandler(a);
         IconManager.Dispose();
+        DesynthesisWindow.DisposeFont();
     }
         
 

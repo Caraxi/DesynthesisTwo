@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Dalamud.Interface;
+using Dalamud.Interface.GameFonts;
 using Dalamud.Interface.Windowing;
 using Dalamud.Memory;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -190,7 +191,7 @@ public unsafe class DesynthesisWindow : Window {
             var headerPosition = ImGui.GetCursorScreenPos();
             ImGui.TableNextRow();
             
-            ImGui.SetWindowFontScale(1.2f);
+            if (gameFont != null) ImGui.PushFont(gameFont.ImFont);
 
             var newHoveredRowIndex = -1;
             
@@ -300,7 +301,7 @@ public unsafe class DesynthesisWindow : Window {
             }
 
             hoveredRowIndex = newHoveredRowIndex;
-            ImGui.SetWindowFontScale(1f);
+            if (gameFont != null) ImGui.PopFont();
             ImGui.EndTable();
         }
         
@@ -384,8 +385,22 @@ public unsafe class DesynthesisWindow : Window {
         items = sortedItems.ToList();
     }
 
+    private GameFontHandle? gameFont;
+    
     public override void OnOpen() {
         SettingsWindowOpen = false;
+        DisposeFont();
+        gameFont = Plugin.PluginInterface.UiBuilder.GetGameFontHandle(new GameFontStyle(GameFontFamily.Axis, 20));
         UpdateItemList();
+    }
+
+    public void DisposeFont() {
+        gameFont?.Dispose();
+        gameFont = null;
+    }
+    
+    public override void OnClose() {
+        DisposeFont();
+        base.OnClose();
     }
 }
