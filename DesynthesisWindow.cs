@@ -187,9 +187,8 @@ public unsafe class DesynthesisWindow : Window {
                 CentreText(ImGui.TableGetColumnName(i));
             }
             ImGui.TableNextRow();
-            ImGui.TableNextRow();
-           
             var headerPosition = ImGui.GetCursorScreenPos();
+            ImGui.TableNextRow();
             
             ImGui.SetWindowFontScale(1.2f);
 
