@@ -10,7 +10,7 @@ namespace DesynthesisTwo;
 
 public sealed class Plugin : IDalamudPlugin
 {
-    public string Name => "Desynthesis Two";
+    public string Name => "Desynthesis 2";
 
     private const string CommandName = "/desynthesis";
     private readonly string[] commandAlias = { "/desynthesistwo", "/desynthesis2", "/desynth2", "/desynth"};
